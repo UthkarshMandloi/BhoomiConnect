@@ -155,6 +155,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </select>
               </div>
 
+              {/* Link to 3-Persona Starting Page */}
+              <Link
+                href="/auth/signin"
+                className="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-[#1B3A6B] px-2.5 py-1.5 rounded-md hover:bg-slate-100 transition border border-transparent hover:border-slate-200"
+                title="Switch institutional persona or view demo credentials"
+              >
+                <Users2 size={13} className="text-[#1B3A6B]" />
+                <span className="font-semibold">Personas / SSO</span>
+              </Link>
+
               {/* 15-Step Interactive Guided Demo Tour Trigger */}
               <button
                 onClick={handleStartTour}

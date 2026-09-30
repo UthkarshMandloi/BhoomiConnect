@@ -22,7 +22,9 @@ import {
   Play,
   Scale,
   Sparkle,
-  BookOpen
+  BookOpen,
+  GraduationCap,
+  Building2
 } from 'lucide-react';
 
 export default function Home() {
@@ -101,6 +103,13 @@ export default function Home() {
               Interactive Demo (15 Steps)
             </button>
             <Link
+              href="/auth/signin"
+              className="px-3.5 py-2 border border-[#1B3A6B] text-[#1B3A6B] hover:bg-blue-50 font-bold text-xs rounded-lg shadow-xs transition flex items-center gap-1.5"
+            >
+              <Users2 size={13} />
+              Sign In (3 Personas)
+            </Link>
+            <Link
               href="/dashboard"
               className="px-4 py-2 bg-[#1B3A6B] hover:bg-[#122849] text-white font-bold text-xs rounded-lg shadow-xs transition"
             >
@@ -132,11 +141,19 @@ export default function Home() {
 
           <div className="mt-8 flex flex-wrap justify-center items-center gap-3.5">
             <Link
-              href="/discover"
+              href="/auth/signin"
               className="px-6 py-3 bg-[#1B3A6B] hover:bg-[#122849] text-white font-bold text-sm rounded-lg flex items-center gap-2 shadow-md transition transform hover:-translate-y-0.5"
             >
-              Start Natural Language Discovery
+              <Users2 size={16} />
+              Login as 3 Personas (Demo Links)
               <ArrowRight size={16} />
+            </Link>
+
+            <Link
+              href="/discover"
+              className="px-6 py-3 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold text-sm rounded-lg flex items-center gap-2 shadow-xs transition transform hover:-translate-y-0.5"
+            >
+              Start Natural Language Discovery
             </Link>
 
             <button
@@ -144,7 +161,7 @@ export default function Home() {
               className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm rounded-lg flex items-center gap-2 shadow-md cursor-pointer transition transform hover:-translate-y-0.5"
             >
               <Play size={16} fill="currentColor" />
-              Run Indore Showcase Tour (Section 27)
+              Run 15-Step Tour
             </button>
           </div>
 
@@ -155,6 +172,194 @@ export default function Home() {
             <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-md">Bhu-Naksha Cadastral</span>
             <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-md">ISRO Bhuvan & VEDAS</span>
             <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-md">Central Ground Water Board</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 3-Persona Multi-Stakeholder Starting Section */}
+      <section className="py-14 bg-slate-900 text-white border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-[11px] font-bold uppercase font-mono text-amber-400 tracking-wider px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20">
+              Role-Based Access Control (RBAC)
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black mt-3">
+              Starting Portals for 3 Core Personas
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 mt-2">
+              Government officials, academic researchers, and department reviewers log in with distinct credentials and authorities. Instant demo links are active for immediate review.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Persona 1: Government Policymaker */}
+            <div className="bg-slate-800/90 border border-blue-500/30 rounded-2xl p-6 flex flex-col justify-between hover:border-blue-400 transition shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                    <Scale size={20} />
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-mono font-bold uppercase">
+                    Government Policymaker
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white">Dr. Ramesh Kumar</h3>
+                <p className="text-xs text-slate-400">State Land Policy Officer & Joint Secretary</p>
+                <p className="text-[11px] text-blue-300 mt-0.5">DoLR, Ministry of Rural Development</p>
+
+                <div className="mt-4 p-3 bg-slate-900/80 rounded-xl border border-slate-700/60 font-mono text-xs space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Email:</span>
+                    <span className="text-slate-200">ramesh.kumar@dolr.gov.in</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Password:</span>
+                    <span className="text-amber-400 font-bold">DoLR@Gov2026!</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-1 text-xs text-slate-300">
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-blue-400" />
+                    Policy Lab Scenario Simulation
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-blue-400" />
+                    Indore Peri-Urban Buffer Directives
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-blue-400" />
+                    Pilot Commissioning & Approvals
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-700">
+                <Link
+                  href="/auth/signin"
+                  className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition shadow"
+                >
+                  Demo Login as Policymaker
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Persona 2: Academic & Research Institution */}
+            <div className="bg-slate-800/90 border border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-400 transition shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <GraduationCap size={20} />
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold uppercase">
+                    Academic & Research
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white">Dr. Priya Sharma</h3>
+                <p className="text-xs text-slate-400">Senior Spatial Scientist & GIS Lead</p>
+                <p className="text-[11px] text-emerald-300 mt-0.5">IIT Indore & SAC-ISRO Lab</p>
+
+                <div className="mt-4 p-3 bg-slate-900/80 rounded-xl border border-slate-700/60 font-mono text-xs space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Email:</span>
+                    <span className="text-slate-200">priya.sharma@iiti.ac.in</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Password:</span>
+                    <span className="text-emerald-400 font-bold">Research@IIT2026#</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-1 text-xs text-slate-300">
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    Multi-temporal Sentinel-2 Ingestion
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    Knowledge Graph & Literature Synthesis
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    Joint Workspace Research Authoring
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-700">
+                <Link
+                  href="/auth/signin"
+                  className="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition shadow"
+                >
+                  Demo Login as Researcher
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Persona 3: Department Reviewer & Validator */}
+            <div className="bg-slate-800/90 border border-amber-500/30 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-400 transition shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-amber-600/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                    <Building2 size={20} />
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold uppercase">
+                    Department Reviewer
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white">Dr. Anita Roy</h3>
+                <p className="text-xs text-slate-400">Lead Evidence Validator & Auditor</p>
+                <p className="text-[11px] text-amber-300 mt-0.5">NIRDPR & Land Governance Cell</p>
+
+                <div className="mt-4 p-3 bg-slate-900/80 rounded-xl border border-slate-700/60 font-mono text-xs space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Email:</span>
+                    <span className="text-slate-200">anita.roy@nirdpr.gov.in</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 text-[10px]">Password:</span>
+                    <span className="text-amber-400 font-bold">Audit@NIRD2026$</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-1 text-xs text-slate-300">
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-amber-400" />
+                    Evidence Validation Gate Sign-offs
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-amber-400" />
+                    License, Methodology & GCP Audits
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-amber-400" />
+                    Cryptographic Audit Trail Logging
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-700">
+                <Link
+                  href="/auth/signin"
+                  className="w-full py-2.5 px-4 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition shadow"
+                >
+                  Demo Login as Validator
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/auth/signin"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 hover:text-amber-300 transition"
+            >
+              Open Dedicated Single Sign-On (SSO) Portal with Pre-filled Form
+              <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
       </section>
