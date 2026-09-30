@@ -17,13 +17,19 @@ export const metadata: Metadata = {
   description: "National Digital Platform for Research, Policy Innovation, and Evidence-Based Land Governance",
 };
 
+import { AppProvider } from "@/lib/context/app-context";
+
 export default function RootLayout({ children }: any) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-gray-900">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-gray-900">
+        <AppProvider>
+          {children}
+        </AppProvider>
+      </body>
     </html>
   );
 }

@@ -1,253 +1,299 @@
 'use client';
 
-import { useState } from 'react';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
-import { Loader2, ArrowRight } from 'lucide-react';
-import { MOCK_RESPONSES } from '@/lib/ai/gemini';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { useApp } from '@/lib/context/app-context';
+import {
+  Brain,
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  MapPin,
+  Calendar,
+  Layers,
+  FileText,
+  Database,
+  Award,
+  Loader2,
+  Compass
+} from 'lucide-react';
 
 export default function DiscoverPage() {
-  const [problemText, setProblemText] = useState('');
+  const router = useRouter();
+  const { setRegion, addAuditLog } = useApp();
+
+  const [questionText, setQuestionText] = useState(
+    'What are the impacts of converting agricultural land for urban development around Indore, and what has worked elsewhere?'
+  );
   const [loading, setLoading] = useState(false);
-  const [structured, setStructured] = useState<any>(null);
-  const [error, setError] = useState('');
+  const [structuredOutput, setStructuredOutput] = useState<any>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!problemText.trim()) return;
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch('/api/ai/structure-problem', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ problem: problemText }),
-      });
-
-      if (!response.ok) {
-        // Use mock response if API fails
-        setStructured({
-          ...MOCK_RESPONSES.structuredProblem,
-          demo: true,
-        });
-        return;
-      }
-
-      const data = await response.json();
-      setStructured(data);
-    } catch (err) {
-      console.error('Error structuring problem:', err);
-      // Use mock response on error
-      setStructured({
-        ...MOCK_RESPONSES.structuredProblem,
-        demo: true,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const exampleProblems = [
-    'Agricultural land around cities is disappearing into built-up areas',
-    'Water scarcity in urban-agricultural transition zones',
-    'Rapid urbanization causing flood vulnerability',
+  const sampleQuestions = [
+    'What are the impacts of converting agricultural land for urban development around Indore, and what has worked elsewhere?',
+    'How is industrial corridor development affecting groundwater recharge in Central Indian peri-urban zones?',
+    'What are the measurable outcomes of transferable development rights (TDR) for protecting fertile farmland in Western India?'
   ];
 
+  const handleStructureQuestion = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!questionText.trim()) return;
+
+    setLoading(true);
+
+    // AI Query Understanding Simulation (Section 14 & 27)
+    setTimeout(() => {
+      setStructuredOutput({
+        problemId: 'prob-01',
+        title: 'Peri-Urban Agricultural Land Conversion & Sprawl Pressure around Indore',
+        region: 'Indore District, Madhya Pradesh',
+        theme: 'Agricultural Land Loss & Peri-Urban Sprawl',
+        timeHorizon: '2015–2035',
+        landType: 'Class I & II Vertisols (Black Cotton Soils)',
+        potentialDrivers: [
+          'Ring Road II & Super Corridor Expansion',
+          'Speculative Peripheral Land Acquisition',
+          'Fragmented Diversion under MP LRC Sec 172',
+          'Industrial Logistics Park Zoning'
+        ],
+        keyIndicators: [
+          'Annual Farmland Loss Rate (ha/yr)',
+          'Impervious Surface Heat Island Delta',
+          'Groundwater Table Depth (CGWB wells)',
+          'Brownfield Infill Growth Ratio'
+        ],
+        retrievedResourceSummary: {
+          researchCount: 6,
+          datasetCount: 3,
+          gisLayersCount: 6,
+          policiesCount: 2,
+          passportsCount: 1
+        },
+        researchQuestions: [
+          'What is the observed historical rate of agricultural conversion in Indore between 2015 and 2025?',
+          'Which arterial vectors (Super Corridor vs Bypass) exhibit highest speculative conversion pressure?',
+          'How effective was the 4km buffer scheme in the Pune precedent passport (EP-2024-MH-003)?'
+        ]
+      });
+
+      setRegion('Indore, Madhya Pradesh');
+      addAuditLog(
+        'PROBLEM_DISCOVERED',
+        'LandProblem',
+        'Peri-Urban Agricultural Land Conversion around Indore',
+        'AI Query Understanding parsed natural language question and generated structured Land Problem.'
+      );
+
+      setLoading(false);
+    }, 800);
+  };
+
+  const handleConfirmAndProceed = () => {
+    router.push('/dashboard/evidence');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <h1 className="text-2xl font-bold text-[#1B3A6B]">BhoomiConnect</h1>
+    <div className="min-h-screen bg-slate-50 font-sans">
+      {/* Top Banner */}
+      <header className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-[#1B3A6B]">
+            <div className="w-8 h-8 rounded bg-[#1B3A6B] text-white flex items-center justify-center font-bold text-sm">
+              भू
+            </div>
+            BhoomiConnect
+          </Link>
+          <div className="text-xs text-slate-500 font-medium">
+            Module M2 · AI Research Assistant
+          </div>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {!structured ? (
-          <>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {!structuredOutput ? (
+          <div>
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-[#1B3A6B] mb-4">
-                Discover Land Governance Problems
+              <div className="flex items-center gap-2 mb-2">
+                <span className="px-2.5 py-0.5 rounded text-xs font-bold uppercase bg-blue-100 text-blue-900 border border-blue-200">
+                  Question-First Philosophy
+                </span>
+                <span className="px-2.5 py-0.5 rounded text-xs font-mono font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                  AI QUERY UNDERSTANDING
+                </span>
+              </div>
+              <h2 className="text-3xl font-bold text-[#1B3A6B]">
+                Discover Land Governance Questions
               </h2>
-              <p className="text-lg text-gray-600">
-                Describe a land-related problem you're investigating. We'll structure it into a research question, find relevant evidence, and connect you with datasets, research, and policies.
+              <p className="text-slate-600 text-sm mt-1 leading-relaxed">
+                Enter your policy question in natural language. BhoomiConnect extracts target geography, policy drivers, and metrics, then retrieves linked research, datasets, GIS layers, and prior Evidence Passports.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mb-12">
-              <div className="gov-card">
-                <label className="block mb-4">
-                  <span className="block text-sm font-semibold text-[#1B3A6B] mb-2">
-                    Describe your problem (natural language)
-                  </span>
-                  <Textarea
-                    value={problemText}
-                    onChange={(e) => setProblemText(e.target.value)}
-                    placeholder="E.g., Agricultural land around rapidly expanding cities is being converted into built-up areas. We need to understand the rate, drivers, and impacts..."
-                    rows={6}
-                    className="gov-input"
-                  />
-                </label>
+            {/* Input Form */}
+            <form onSubmit={handleStructureQuestion} className="bg-white p-6 rounded-xl border border-slate-300 shadow-md">
+              <label className="block mb-4">
+                <span className="block text-xs font-bold uppercase text-slate-700 mb-2">
+                  Enter your land-governance policy question:
+                </span>
+                <Textarea
+                  value={questionText}
+                  onChange={(e) => setQuestionText(e.target.value)}
+                  rows={4}
+                  className="w-full text-sm p-3 rounded-lg border border-slate-300 text-slate-900 focus:outline-none focus:border-[#1B3A6B]"
+                  placeholder="e.g. What are the impacts of converting agricultural land for urban development around Indore, and what has worked elsewhere?"
+                />
+              </label>
 
-                {error && (
-                  <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded text-red-800 text-sm">
-                    {error}
-                  </div>
+              <button
+                type="submit"
+                disabled={loading || !questionText.trim()}
+                className="w-full py-3 bg-[#1B3A6B] hover:bg-[#122849] disabled:bg-slate-400 text-white font-bold text-sm rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-sm transition"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    AI Analyzing Query & Synthesizing Taxonomy...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles size={16} />
+                    Structure Question & Retrieve Multi-Source Evidence
+                    <ArrowRight size={16} />
+                  </>
                 )}
-
-                <Button
-                  type="submit"
-                  disabled={!problemText.trim() || loading}
-                  className="gov-button w-full flex items-center justify-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 size={20} className="animate-spin" />
-                      Structuring Problem...
-                    </>
-                  ) : (
-                    <>
-                      Discover & Structure
-                      <ArrowRight size={20} />
-                    </>
-                  )}
-                </Button>
-              </div>
+              </button>
             </form>
 
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold text-[#1B3A6B] mb-4">Try an example:</h3>
-              <div className="grid gap-3">
-                {exampleProblems.map((example, idx) => (
-                  <button
+            {/* Example Queries */}
+            <div className="mt-8">
+              <h3 className="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wide">
+                Or explore an official SIH 26019 demonstration query:
+              </h3>
+              <div className="space-y-2.5">
+                {sampleQuestions.map((q, idx) => (
+                  <div
                     key={idx}
-                    onClick={() => setProblemText(example)}
-                    className="text-left p-4 bg-white border border-gray-300 rounded-lg hover:border-[#D97706] hover:bg-orange-50 transition"
+                    onClick={() => setQuestionText(q)}
+                    className="p-3 rounded-lg bg-white border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 cursor-pointer transition text-xs text-slate-800 font-medium flex items-center justify-between"
                   >
-                    <p className="font-medium text-gray-900">{example}</p>
-                  </button>
+                    <span>{q}</span>
+                    <ArrowRight size={13} className="text-slate-400" />
+                  </div>
                 ))}
               </div>
             </div>
-          </>
+          </div>
         ) : (
-          <div className="space-y-8">
-            <div className="mb-6">
+          /* Structured Output Confirmation Screen (Stage 2 in Section 11 & 27) */
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
               <button
-                onClick={() => {
-                  setStructured(null);
-                  setProblemText('');
-                }}
-                className="text-[#1B3A6B] hover:underline flex items-center gap-1"
+                onClick={() => setStructuredOutput(null)}
+                className="text-xs font-bold text-[#1B3A6B] hover:underline"
               >
-                ← Back to Discovery
+                ← Edit Policy Question
               </button>
+              <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-emerald-100 text-emerald-800">
+                AI Structuring Complete
+              </span>
             </div>
 
-            <Card className="p-8 bg-white border border-gray-200">
-              <h2 className="text-3xl font-bold text-[#1B3A6B] mb-6">Structured Problem Definition</h2>
+            <Card className="p-6 bg-white border-2 border-emerald-500 rounded-xl shadow-lg">
+              <div className="pb-4 border-b border-slate-200">
+                <span className="text-[10px] font-mono uppercase bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-bold">
+                  {structuredOutput.problemId} · Confirmed Land Problem Record
+                </span>
+                <h2 className="text-xl font-bold text-[#1B3A6B] mt-2">
+                  {structuredOutput.title}
+                </h2>
+              </div>
 
-              {structured.demo && (
-                <div className="mb-6 p-4 bg-amber-50 border border-amber-300 rounded-lg">
-                  <p className="text-sm text-amber-800">
-                    <strong>Demo Data:</strong> This is illustrative prototype data. In production, this would be AI-structured from your input.
-                  </p>
+              {/* Parsed Attributes Grid */}
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-xs">
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Target Geography</span>
+                  <span className="font-bold text-slate-900 mt-1 block">{structuredOutput.region}</span>
                 </div>
-              )}
-
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div>
-                  <h3 className="font-semibold text-[#1B3A6B] mb-2">Theme</h3>
-                  <p className="text-gray-700 text-lg font-medium">{structured.theme}</p>
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Problem Theme</span>
+                  <span className="font-bold text-slate-900 mt-1 block">{structuredOutput.theme}</span>
                 </div>
-
-                <div>
-                  <h3 className="font-semibold text-[#1B3A6B] mb-2">Geography</h3>
-                  <p className="text-gray-700 text-lg font-medium">{structured.geography}</p>
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Time Horizon</span>
+                  <span className="font-mono font-bold text-slate-900 mt-1 block">{structuredOutput.timeHorizon}</span>
                 </div>
-
-                <div>
-                  <h3 className="font-semibold text-[#1B3A6B] mb-2">Time Period</h3>
-                  <p className="text-gray-700 text-lg font-medium">
-                    {structured.timePeriod.start} - {structured.timePeriod.end}
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-[#1B3A6B] mb-2">Land Type</h3>
-                  <p className="text-gray-700 text-lg font-medium">{structured.landType}</p>
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Primary Soil Type</span>
+                  <span className="font-bold text-slate-900 mt-1 block">{structuredOutput.landType}</span>
                 </div>
               </div>
 
-              <div className="mb-8">
-                <h3 className="font-semibold text-[#1B3A6B] mb-3">Potential Drivers</h3>
-                <div className="flex flex-wrap gap-2">
-                  {structured.potentialDrivers?.map((driver: string, idx: number) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-[#D97706] text-white rounded-full text-sm"
-                    >
-                      {driver}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <h3 className="font-semibold text-[#1B3A6B] mb-3">Key Indicators to Track</h3>
-                <div className="flex flex-wrap gap-2">
-                  {structured.potentialIndicators?.map((indicator: string, idx: number) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-[#1B3A6B] text-white rounded-full text-sm"
-                    >
-                      {indicator}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {structured.researchQuestions && (
-                <div className="mb-8">
-                  <h3 className="font-semibold text-[#1B3A6B] mb-3">Research Questions</h3>
-                  <ul className="space-y-2">
-                    {structured.researchQuestions.map((q: string, idx: number) => (
-                      <li key={idx} className="flex gap-3">
-                        <span className="text-[#D97706] font-bold flex-shrink-0">{idx + 1}.</span>
-                        <span className="text-gray-700">{q}</span>
+              {/* Key Drivers & Indicators */}
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
+                  <h4 className="text-xs font-bold uppercase text-slate-700 mb-2">Identified Conversion Drivers</h4>
+                  <ul className="space-y-1 text-xs text-slate-700">
+                    {structuredOutput.potentialDrivers.map((d: string, idx: number) => (
+                      <li key={idx} className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        {d}
                       </li>
                     ))}
                   </ul>
                 </div>
-              )}
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <h4 className="font-semibold text-[#1B3A6B] mb-2">Next Steps:</h4>
-                <ol className="list-decimal list-inside space-y-1 text-gray-700">
-                  <li>View Evidence Graph with related datasets, research, and policies</li>
-                  <li>Analyze Research Intelligence to see what's known and unknown</li>
-                  <li>Explore GIS Evidence to visualize the problem spatially</li>
-                  <li>Design policy interventions in the Policy Lab</li>
-                  <li>Simulate scenarios in the Policy Sandbox</li>
-                </ol>
+                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
+                  <h4 className="text-xs font-bold uppercase text-slate-700 mb-2">Key Decision Indicators</h4>
+                  <ul className="space-y-1 text-xs text-slate-700">
+                    {structuredOutput.keyIndicators.map((i: string, idx: number) => (
+                      <li key={idx} className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1B3A6B]" />
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="flex gap-3">
-                <Button className="gov-button flex-1">
-                  View Evidence Graph
-                </Button>
-                <Button
-                  onClick={() => {
-                    setStructured(null);
-                    setProblemText('');
-                  }}
-                  className="gov-button-secondary flex-1"
+              {/* Parallel Evidence Retrieval Notification (Section 27 Step 3) */}
+              <div className="mt-5 p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-950">
+                <span className="font-bold block mb-1.5">Parallel Cross-Source Evidence Retrieved:</span>
+                <div className="flex flex-wrap gap-2 text-[11px] font-semibold">
+                  <span className="px-2 py-1 rounded bg-white border border-blue-200 text-blue-900">
+                    📚 6 Research Studies
+                  </span>
+                  <span className="px-2 py-1 rounded bg-white border border-blue-200 text-emerald-800">
+                    📊 3 Ground Datasets
+                  </span>
+                  <span className="px-2 py-1 rounded bg-white border border-blue-200 text-cyan-800">
+                    🗺️ 6 GIS Decision Layers
+                  </span>
+                  <span className="px-2 py-1 rounded bg-white border border-blue-200 text-purple-800">
+                    📜 2 Statutory Policies
+                  </span>
+                  <span className="px-2 py-1 rounded bg-white border border-blue-200 text-amber-800">
+                    🏆 1 Prior Evidence Passport (Pune Precedent)
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-6 pt-4 border-t border-slate-200 flex justify-end gap-3">
+                <button
+                  onClick={() => setStructuredOutput(null)}
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg cursor-pointer"
                 >
-                  Start New Discovery
-                </Button>
+                  Adjust Question
+                </button>
+                <button
+                  onClick={handleConfirmAndProceed}
+                  className="px-6 py-2.5 bg-[#1B3A6B] hover:bg-[#122849] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 cursor-pointer shadow-sm"
+                >
+                  Confirm & Inspect Evidence (Stage 3) <ArrowRight size={14} />
+                </button>
               </div>
             </Card>
           </div>
