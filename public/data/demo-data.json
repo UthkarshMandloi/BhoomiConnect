@@ -1,0 +1,210 @@
+{
+  "problems": [
+    {
+      "title": "Agricultural land conversion around expanding cities",
+      "description": "Agricultural land around rapidly expanding cities is being converted into built-up areas, threatening food security and rural livelihoods",
+      "theme": "urbanization",
+      "geography": "Urban fringe regions, Maharashtra",
+      "timePeriod": { "start": 2015, "end": 2026 },
+      "landType": "Agricultural",
+      "potentialDrivers": ["Population growth", "Infrastructure expansion", "Industrial development", "Road connectivity", "Real estate speculation"],
+      "potentialIndicators": ["Agricultural land loss %", "Built-up expansion rate", "Population growth", "Infrastructure density", "Water stress", "Flood vulnerability"],
+      "researchQuestions": ["What is the rate of agricultural land conversion?", "What are the primary drivers?", "What are socio-economic impacts on farmers?"]
+    },
+    {
+      "title": "Water scarcity in urban-agricultural transitions",
+      "description": "Changing land-use patterns affecting groundwater availability and quality",
+      "theme": "water",
+      "geography": "Pune, Bangalore metropolitan regions",
+      "timePeriod": { "start": 2010, "end": 2026 },
+      "landType": "Mixed",
+      "potentialDrivers": ["Groundwater extraction", "Monsoon variability", "Land-use change", "Industrial pollution"],
+      "potentialIndicators": ["Water table depth", "Water quality metrics", "Supply-demand gap", "Seasonal variation"],
+      "researchQuestions": ["How does urbanization affect water availability?", "What recharge zone interventions work?"]
+    }
+  ],
+  "datasets": [
+    {
+      "name": "Land Use Land Cover (LULC) - Sentinel-2",
+      "source": "VEDAS/ISRO-SAC",
+      "description": "Satellite-based land-use classification at 30m resolution covering India",
+      "type": "raster",
+      "coverage": ["Maharashtra", "Karnataka", "Gujarat", "Andhra Pradesh"],
+      "temporalRange": { "start": 2015, "end": 2026 },
+      "spatialResolution": "30m",
+      "license": "Creative Commons Attribution 4.0",
+      "validationStatus": "verified"
+    },
+    {
+      "name": "Population Census 2021",
+      "source": "Census of India / data.gov.in",
+      "description": "District and block level population data from Census of India 2021",
+      "type": "tabular",
+      "coverage": ["India-wide"],
+      "temporalRange": { "start": 2021, "end": 2021 },
+      "spatialResolution": "District level",
+      "license": "Government of India",
+      "validationStatus": "verified"
+    },
+    {
+      "name": "Urban Expansion Index",
+      "source": "Bhuvan ISRO",
+      "description": "Annual urban expansion rates by city",
+      "type": "tabular",
+      "coverage": ["Metropolitan areas"],
+      "temporalRange": { "start": 2010, "end": 2026 },
+      "spatialResolution": "City level",
+      "license": "ISRO",
+      "validationStatus": "verified"
+    },
+    {
+      "name": "Rainfall and Climate Data",
+      "source": "IMD / VEDAS",
+      "description": "Gridded rainfall and temperature data at district level",
+      "type": "raster",
+      "coverage": ["India-wide"],
+      "temporalRange": { "start": 2000, "end": 2026 },
+      "spatialResolution": "0.25 degree grid",
+      "license": "Government of India",
+      "validationStatus": "verified"
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Urban expansion and agricultural land loss in Indian metropolitan regions: A satellite-based analysis 2015-2023",
+      "authors": ["Dr. Ramesh Kumar", "Dr. Priya Sharma", "Dr. Anil Patel"],
+      "year": 2023,
+      "abstract": "This study quantifies agricultural land loss around major Indian cities using Sentinel-2 LULC data. We analyzed 12 metropolitan regions and found an average 12% reduction in agricultural land over 8 years, with hotspots around Pune, Bangalore, and Hyderabad.",
+      "objectives": ["Quantify agricultural land loss", "Identify spatial hotspots", "Analyze conversion drivers", "Project future trends"],
+      "geography": "Mumbai, Delhi, Bangalore, Pune, Hyderabad, Nagpur",
+      "datasets": ["Sentinel-2 LULC", "Census population"],
+      "methods": ["Change detection analysis", "Spatial regression", "Time-series analysis"],
+      "findings": ["Agricultural loss: 12% over 8 years", "Conversion rate increasing exponentially", "Correlation with population growth 0.87"],
+      "limitations": ["Cloud cover affects monsoon data", "Field validation limited to 3 districts", "Historical LULC data incomplete before 2015"]
+    },
+    {
+      "title": "Land conversion patterns and farmer livelihood impacts in Tier-2 Indian cities",
+      "authors": ["Dr. Meera Desai", "Dr. Suresh Iyer"],
+      "year": 2022,
+      "abstract": "Qualitative and quantitative study of how rapid urbanization affects farmer incomes and social structures in smaller metropolitan areas.",
+      "objectives": ["Assess farmer livelihood changes", "Document social disruption", "Identify adaptation strategies"],
+      "geography": "Pune, Nagpur, Aurangabad",
+      "datasets": ["Household surveys", "Income data", "Land records"],
+      "methods": ["Household surveys (500+)", "FGDs", "Econometric analysis"],
+      "findings": ["Average income decline: 23% post-conversion", "60% farmers unable to adapt", "Social cohesion disrupted"],
+      "limitations": ["Sample limited to 3 regions", "Retrospective data collection", "Seasonal variation not captured"]
+    },
+    {
+      "title": "Policy effectiveness of agricultural land protection acts in India",
+      "authors": ["Dr. Vishal Gupta", "Prof. Anita Verma"],
+      "year": 2024,
+      "abstract": "Comparative analysis of land protection policies across states and their effectiveness in reducing conversion rates.",
+      "objectives": ["Evaluate policy effectiveness", "Identify enforcement gaps", "Compare interstate approaches"],
+      "geography": "Maharashtra, Karnataka, Tamil Nadu, Punjab",
+      "datasets": ["Policy documents", "Land records", "Enforcement data"],
+      "methods": ["Policy analysis", "Comparative evaluation", "Impact assessment"],
+      "findings": ["Enforcement is critical factor", "States with dedicated courts have 34% better outcomes", "Community involvement increases effectiveness"],
+      "limitations": ["Enforcement data incomplete", "Confounding policy changes", "Long-term data limited"]
+    }
+  ],
+  "policies": [
+    {
+      "name": "Agricultural Land Protection Act (Maharashtra)",
+      "description": "State-level regulation restricting conversion of agricultural land for non-agricultural purposes",
+      "geography": "Maharashtra",
+      "enactedYear": 2020,
+      "type": "Land protection"
+    },
+    {
+      "name": "Urban Land Ceiling Act (Amended)",
+      "description": "Central law limiting urban land holdings to control speculation",
+      "geography": "India-wide",
+      "enactedYear": 1976,
+      "type": "Urban planning"
+    },
+    {
+      "name": "State Agricultural Policy 2021",
+      "description": "Comprehensive state-level policy promoting sustainable agriculture and land use",
+      "geography": "Maharashtra",
+      "enactedYear": 2021,
+      "type": "Agricultural"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Current Trend",
+      "description": "Business as usual - agricultural land continues converting at current rates",
+      "indicators": {
+        "agriculturalLandLoss": -12,
+        "builtupGrowth": 15,
+        "waterStress": 8,
+        "infrastructurePressure": 12,
+        "floodVulnerability": 5
+      }
+    },
+    {
+      "name": "Controlled Conversion",
+      "description": "Policy intervention allowing controlled agricultural-to-urban transitions with compensation",
+      "indicators": {
+        "agriculturalLandLoss": -6,
+        "builtupGrowth": 12,
+        "waterStress": 5,
+        "infrastructurePressure": 10,
+        "floodVulnerability": 3
+      }
+    },
+    {
+      "name": "Restrictive",
+      "description": "Strict protection of agricultural land with severe penalties for conversion",
+      "indicators": {
+        "agriculturalLandLoss": -2,
+        "builtupGrowth": 8,
+        "waterStress": 3,
+        "infrastructurePressure": 7,
+        "floodVulnerability": 1
+      }
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Annual Agricultural Land Conversion",
+      "type": "percentage",
+      "unit": "% change",
+      "target": -5,
+      "direction": "lower_is_better",
+      "baseline": -12
+    },
+    {
+      "name": "Built-up Area Expansion",
+      "type": "percentage",
+      "unit": "% annual",
+      "target": 10,
+      "direction": "lower_is_better",
+      "baseline": 15
+    },
+    {
+      "name": "Water Demand Pressure",
+      "type": "ratio",
+      "unit": "supply/demand",
+      "target": 1.0,
+      "direction": "higher_is_better",
+      "baseline": 0.7
+    },
+    {
+      "name": "Infrastructure Cost per Capita",
+      "type": "cost",
+      "unit": "₹ per capita",
+      "target": 2000,
+      "direction": "lower_is_better",
+      "baseline": 3000
+    },
+    {
+      "name": "Flood Vulnerability Index",
+      "type": "ratio",
+      "unit": "0-10 scale",
+      "target": 3,
+      "direction": "lower_is_better",
+      "baseline": 5
+    }
+  ]
+}
